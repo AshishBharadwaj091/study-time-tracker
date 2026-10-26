@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Focus Mini Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0906;
+      --panel: rgba(24, 18, 14, 0.95);
+      --border: rgba(249, 115, 22, 0.35);
+      --primary: #f97316;
+      --primary-light: #fb923c;
+      --text: #fff7ed;
+      --muted: #a8988a;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,220,180,0.15);
+    }
+    .drag-bar {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      -webkit-app-region: drag;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+    .drag-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--primary-light);
+    }
+    .badge {
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(249, 115, 22, 0.16);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: #fed7aa;
+    }
+    .close-btn {
+      -webkit-app-region: no-drag;
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.15s ease;
+    }
+    .close-btn:hover {
+      background: rgba(244, 63, 94, 0.2);
+      color: #fecdd3;
+    }
+    .timer-core {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      gap: 4px;
+    }
+    .subject-tag {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .time-val {
+      font-family: var(--font-mono);
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(249, 115, 22, 0.35);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 12px 14px;
+      -webkit-app-region: no-drag;
+    }
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff7a00, #ea580c);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35);
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-sec {
+      background: rgba(36, 26, 18, 0.9);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--text);
+    }
+    .btn-sec:hover { border-color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="drag-bar">
+    <div class="drag-title">
+      <span>✦ FOCUS</span>
+      <span class="badge" id="mini-badge">POMODORO</span>
+    </div>
+    <button class="close-btn" id="mini-close-btn" title="Close mini timer">✕</button>
+  </div>
+  <div class="timer-core">
+    <span class="subject-tag" id="mini-subject">General</span>
+    <div class="time-val" id="mini-clock">25:00</div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-primary" id="mini-play-btn">▶ Play</button>
+    <button class="btn btn-sec" id="mini-finish-btn">■ Finish</button>
+    <button class="btn btn-sec" id="mini-reset-btn">↺ Reset</button>
+  </div>
+  <script src="mini-renderer.js"></script>
+</body>
+</html>

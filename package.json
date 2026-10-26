@@ -21,9 +21,12 @@
     "files": [
       "main.js",
       "preload.js",
+      "mini-preload.js",
       "index.html",
+      "mini-timer.html",
       "styles.css",
       "renderer.js",
+      "mini-renderer.js",
       "package.json"
     ],
     "win": {
