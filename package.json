@@ -8,6 +8,7 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
+    "test": "node --test test/unit.test.js",
     "dist": "electron-builder --win nsis"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
       "main.js",
       "preload.js",
       "mini-preload.js",
+      "focus-engine.js",
       "index.html",
       "mini-timer.html",
       "styles.css",

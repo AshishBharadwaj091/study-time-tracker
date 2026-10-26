@@ -1,12 +1,13 @@
-const { app, BrowserWindow, ipcMain, Notification } = require('electron');
+const electron = require('electron');
+const { app, BrowserWindow, ipcMain, Notification } = (typeof electron === 'object' && electron !== null) ? electron : {};
 const path = require('path');
 const fs = require('fs');
 
 let mainWindow = null;
 let miniWindow = null;
 
-const dataPath = () => path.join(app.getPath('userData'), 'study-data.json');
-const backupPath = () => path.join(app.getPath('userData'), 'study-data.backup.json');
+const dataPath = () => (app && app.getPath ? path.join(app.getPath('userData'), 'study-data.json') : path.join(__dirname, 'study-data.json'));
+const backupPath = () => (app && app.getPath ? path.join(app.getPath('userData'), 'study-data.backup.json') : path.join(__dirname, 'study-data.backup.json'));
 
 function defaultData() {
   return {
@@ -207,46 +208,52 @@ function createMiniWindow() {
   });
 }
 
-app.whenReady().then(() => {
-  if (process.platform === 'win32') {
-    app.setAppUserModelId('com.coadcraft.studytracker');
-  }
-
-  ipcMain.handle('data:load', () => readData());
-  ipcMain.handle('data:save', (_event, data) => {
-    const ok = writeData(data);
-    return { ok };
-  });
-
-  ipcMain.handle('mini:open', () => {
-    createMiniWindow();
-    return { ok: true };
-  });
-
-  ipcMain.handle('mini:close', () => {
-    if (miniWindow && !miniWindow.isDestroyed()) {
-      miniWindow.close();
+if (app && app.whenReady) {
+  app.whenReady().then(() => {
+    if (process.platform === 'win32') {
+      app.setAppUserModelId('com.coadcraft.studytracker');
     }
-    return { ok: true };
+
+    ipcMain.handle('data:load', () => readData());
+    ipcMain.handle('data:save', (_event, data) => {
+      const ok = writeData(data);
+      return { ok };
+    });
+
+    ipcMain.handle('mini:open', () => {
+      createMiniWindow();
+      return { ok: true };
+    });
+
+    ipcMain.handle('mini:close', () => {
+      if (miniWindow && !miniWindow.isDestroyed()) {
+        miniWindow.close();
+      }
+      return { ok: true };
+    });
+
+    ipcMain.on('timer:broadcast', (_event, payload) => {
+      // Relay timer synchronization between main and mini window
+      if (mainWindow && !mainWindow.isDestroyed() && _event.sender !== mainWindow.webContents) {
+        mainWindow.webContents.send('timer:broadcast', payload);
+      }
+      if (miniWindow && !miniWindow.isDestroyed() && _event.sender !== miniWindow.webContents) {
+        miniWindow.webContents.send('timer:broadcast', payload);
+      }
+    });
+
+    createMainWindow();
+
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
+    });
   });
 
-  ipcMain.on('timer:broadcast', (_event, payload) => {
-    // Relay timer synchronization between main and mini window
-    if (mainWindow && !mainWindow.isDestroyed() && _event.sender !== mainWindow.webContents) {
-      mainWindow.webContents.send('timer:broadcast', payload);
-    }
-    if (miniWindow && !miniWindow.isDestroyed() && _event.sender !== miniWindow.webContents) {
-      miniWindow.webContents.send('timer:broadcast', payload);
-    }
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit();
   });
+}
 
-  createMainWindow();
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
-  });
-});
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { defaultData, migrateData };
+}
