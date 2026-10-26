@@ -9,8 +9,8 @@
     "start": "electron .",
     "dev": "electron .",
     "test": "node --test test/unit.test.js",
-    "dist": "electron-builder --win nsis --config builder-config.json",
-    "dist:portable": "electron-builder --win portable --config builder-config.json"
+    "dist": "electron-builder --win nsis --config builder-config.json && node -e \"const fs=require('fs');const src='C:/Users/ashis/AppData/Local/Temp/study-tracker-dist/Study Time Tracker Setup 1.0.0.exe';if(fs.existsSync(src))fs.copyFileSync(src, 'dist/Study Time Tracker Setup 1.0.0.exe')\"",
+    "dist:portable": "electron-builder --win portable --config builder-config.json && node -e \"const fs=require('fs');const src='C:/Users/ashis/AppData/Local/Temp/study-tracker-dist/Study Time Tracker Portable 1.0.0.exe';if(fs.existsSync(src))fs.copyFileSync(src, 'dist/Study Time Tracker Portable 1.0.0.exe')\""
   },
   "devDependencies": {
     "electron": "^35.0.0",
