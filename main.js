@@ -30,6 +30,9 @@ function createWindow() {
   mainWindow.loadFile('index.html');
 }
 app.whenReady().then(() => {
+  if (process.platform === 'win32') {
+    app.setAppUserModelId('com.coadcraft.studytracker');
+  }
   ipcMain.handle('data:load', () => readData());
   ipcMain.handle('data:save', (_event, data) => { writeData(data); return { ok: true }; });
   createWindow();

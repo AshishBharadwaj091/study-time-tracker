@@ -2,6 +2,8 @@
   "name": "study-time-tracker",
   "version": "1.0.0",
   "description": "A simple dark-mode Windows study time tracker",
+  "author": "Ashish Bharadwaj",
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
