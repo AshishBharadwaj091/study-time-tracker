@@ -18,7 +18,7 @@
   "build": {
     "appId": "com.coadcraft.studytracker",
     "productName": "Study Time Tracker",
-    "directories": { "output": "dist" },
+    "directories": { "output": "build-dist" },
     "files": [
       "main.js",
       "preload.js",

@@ -1,0 +1,30 @@
+{
+  "appId": "com.coadcraft.studytracker",
+  "productName": "Study Time Tracker",
+  "directories": {
+    "output": "C:/Users/ashis/AppData/Local/Temp/study-tracker-dist"
+  },
+  "files": [
+    "main.js",
+    "preload.js",
+    "mini-preload.js",
+    "focus-engine.js",
+    "index.html",
+    "mini-timer.html",
+    "styles.css",
+    "renderer.js",
+    "mini-renderer.js",
+    "package.json"
+  ],
+  "win": {
+    "target": ["nsis"]
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Study Time Tracker",
+    "uninstallDisplayName": "Study Time Tracker"
+  }
+}
