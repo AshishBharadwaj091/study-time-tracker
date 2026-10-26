@@ -17,7 +17,7 @@
   "build": {
     "appId": "com.coadcraft.studytracker",
     "productName": "Study Time Tracker",
-    "directories": { "output": "release" },
+    "directories": { "output": "dist" },
     "files": [
       "main.js",
       "preload.js",
@@ -33,7 +33,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "shortcutName": "Study Time Tracker",
+      "uninstallDisplayName": "Study Time Tracker"
     }
   }
 }
