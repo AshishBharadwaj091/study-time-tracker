@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Time Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark">✦</div>
+      <div><div class="eyebrow">YOUR PERSONAL FOCUS SPACE</div><h1>Study Time Tracker</h1></div>
+      <div class="today-pill"><span class="live-dot"></span><span id="today-label">Today</span></div>
+    </header>
+
+    <main>
+      <section class="hero card">
+        <div class="hero-copy">
+          <div class="eyebrow">CURRENT SESSION</div>
+          <h2 id="timer-display">00:00:00</h2>
+          <p id="timer-status">Ready when you are. Start a session to begin.</p>
+          <div class="timer-actions">
+            <button id="start-btn" class="btn btn-primary">▶ &nbsp; Start studying</button>
+            <button id="pause-btn" class="btn btn-secondary" disabled>Ⅱ &nbsp; Pause</button>
+            <button id="finish-btn" class="btn btn-quiet" disabled>■ &nbsp; Finish</button>
+          </div>
+        </div>
+        <div class="focus-orb" aria-hidden="true"><div class="orb-inner"><span>FOCUS</span><strong>✦</strong></div></div>
+      </section>
+
+      <section class="grid stats-grid">
+        <article class="card stat-card"><div class="stat-top"><span class="stat-icon purple">◷</span><span class="stat-label">STUDIED TODAY</span></div><div id="today-total" class="stat-value">0h 00m</div><div class="stat-foot">Across all subjects</div></article>
+        <article class="card stat-card"><div class="stat-top"><span class="stat-icon blue">▥</span><span class="stat-label">THIS WEEK</span></div><div id="week-total" class="stat-value">0h 00m</div><div class="stat-foot">Monday to today</div></article>
+        <article class="card stat-card"><div class="stat-top"><span class="stat-icon green">◎</span><span class="stat-label">DAILY GOAL</span></div><div id="goal-total" class="stat-value">0%</div><div class="progress-track"><div id="goal-progress" class="progress-fill"></div></div><div id="goal-caption" class="stat-foot">0m of 4h goal</div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="card subject-card">
+          <div class="section-heading"><div><div class="eyebrow">MAKE IT COUNT</div><h3>Study session</h3></div><span class="small-tag">SUBJECT</span></div>
+          <label for="subject-select">What are you studying?</label>
+          <div class="subject-row"><select id="subject-select"><option>General</option><option>Maths</option><option>Science</option><option>Coding</option><option>English</option><option>Reading</option></select><button id="add-subject-btn" class="icon-btn" title="Add a subject" aria-label="Add a subject">＋</button></div>
+          <div class="divider"></div>
+          <div class="section-heading compact"><div><h3>Daily goal</h3></div><span class="muted">Target hours &amp; minutes</span></div>
+          <div class="goal-setting">
+            <div class="time-field">
+              <input id="goal-hours" type="number" min="0" max="23" value="4" aria-label="Goal hours">
+              <span class="unit-label">hr</span>
+            </div>
+            <div class="time-field">
+              <input id="goal-mins" type="number" min="0" max="59" step="5" value="0" aria-label="Goal minutes">
+              <span class="unit-label">min</span>
+            </div>
+            <button id="save-goal-btn" class="btn btn-small">Save goal</button>
+          </div>
+          <p class="hint">Tip: pause the timer when you take a break. Your records are saved on this laptop.</p>
+        </article>
+
+        <article class="card history-card">
+          <div class="section-heading"><div><div class="eyebrow">YOUR PROGRESS</div><h3>Recent sessions</h3></div><span id="session-count" class="count-pill">0 sessions</span></div>
+          <div id="history-list" class="history-list"><div class="empty-state"><span>◷</span><strong>Your first session starts here</strong><p>Complete a study session and it will show up here.</p></div></div>
+        </article>
+      </section>
+      <footer><span>Made for focused days.</span><span>Stored locally on this device <span class="footer-dot">●</span></span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
