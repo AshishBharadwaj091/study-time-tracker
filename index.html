@@ -4,44 +4,148 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Study Time Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="ambient-glow ambient-1"></div>
+  <div class="ambient-glow ambient-2"></div>
+  <div class="ambient-glow ambient-3"></div>
+
   <div class="app-shell">
     <header class="topbar">
-      <div class="brand-mark">✦</div>
-      <div><div class="eyebrow">YOUR PERSONAL FOCUS SPACE</div><h1>Study Time Tracker</h1></div>
-      <div class="today-pill"><span class="live-dot"></span><span id="today-label">Today</span></div>
+      <div class="brand-group">
+        <div class="brand-mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="eyebrow">PERSONAL FOCUS OS</div>
+          <h1>Study Time Tracker</h1>
+        </div>
+      </div>
+      <div class="today-pill">
+        <span class="live-dot" id="live-dot"></span>
+        <span id="today-label">Today</span>
+      </div>
     </header>
 
     <main>
-      <section class="hero card">
+      <section class="hero card" id="hero-section">
         <div class="hero-copy">
-          <div class="eyebrow">CURRENT SESSION</div>
-          <h2 id="timer-display">00:00:00</h2>
+          <div class="hero-status-row">
+            <span class="status-badge" id="session-badge">FOCUS SESSION</span>
+            <span class="subject-badge" id="active-subject-badge">General</span>
+          </div>
+          <div class="timer-display-wrapper">
+            <h2 id="timer-display" class="timer-display">00:00:00</h2>
+          </div>
           <p id="timer-status">Ready when you are. Start a session to begin.</p>
           <div class="timer-actions">
-            <button id="start-btn" class="btn btn-primary">▶ &nbsp; Start studying</button>
-            <button id="pause-btn" class="btn btn-secondary" disabled>Ⅱ &nbsp; Pause</button>
-            <button id="finish-btn" class="btn btn-quiet" disabled>■ &nbsp; Finish</button>
+            <button id="start-btn" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+              <span>Start studying</span>
+            </button>
+            <button id="pause-btn" class="btn btn-secondary" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+              <span>Pause</span>
+            </button>
+            <button id="finish-btn" class="btn btn-quiet" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+              <span>Finish</span>
+            </button>
           </div>
         </div>
-        <div class="focus-orb" aria-hidden="true"><div class="orb-inner"><span>FOCUS</span><strong>✦</strong></div></div>
+        <div class="focus-orb-container" aria-hidden="true">
+          <div class="focus-orb" id="focus-orb">
+            <div class="orb-pulse-layer layer-3"></div>
+            <div class="orb-pulse-layer layer-2"></div>
+            <div class="orb-pulse-layer layer-1"></div>
+            <div class="orb-inner">
+              <span class="orb-label">FOCUS</span>
+              <strong class="orb-icon">✦</strong>
+              <span class="orb-status" id="orb-status-text">IDLE</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="grid stats-grid">
-        <article class="card stat-card"><div class="stat-top"><span class="stat-icon purple">◷</span><span class="stat-label">STUDIED TODAY</span></div><div id="today-total" class="stat-value">0h 00m</div><div class="stat-foot">Across all subjects</div></article>
-        <article class="card stat-card"><div class="stat-top"><span class="stat-icon blue">▥</span><span class="stat-label">THIS WEEK</span></div><div id="week-total" class="stat-value">0h 00m</div><div class="stat-foot">Monday to today</div></article>
-        <article class="card stat-card"><div class="stat-top"><span class="stat-icon green">◎</span><span class="stat-label">DAILY GOAL</span></div><div id="goal-total" class="stat-value">0%</div><div class="progress-track"><div id="goal-progress" class="progress-fill"></div></div><div id="goal-caption" class="stat-foot">0m of 4h goal</div></article>
+        <article class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon purple">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="stat-label">STUDIED TODAY</span>
+          </div>
+          <div id="today-total" class="stat-value">0h 00m</div>
+          <div class="stat-foot">Across all subjects</div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon blue">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="stat-label">THIS WEEK</span>
+          </div>
+          <div id="week-total" class="stat-value">0h 00m</div>
+          <div class="stat-foot">Monday to today</div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon green">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <span class="stat-label">DAILY GOAL</span>
+          </div>
+          <div id="goal-total" class="stat-value">0%</div>
+          <div class="progress-track"><div id="goal-progress" class="progress-fill"></div></div>
+          <div id="goal-caption" class="stat-foot">0h 00m of 4h 00m goal</div>
+        </article>
       </section>
 
       <section class="content-grid">
         <article class="card subject-card">
-          <div class="section-heading"><div><div class="eyebrow">MAKE IT COUNT</div><h3>Study session</h3></div><span class="small-tag">SUBJECT</span></div>
-          <label for="subject-select">What are you studying?</label>
-          <div class="subject-row"><select id="subject-select"><option>General</option><option>Maths</option><option>Science</option><option>Coding</option><option>English</option><option>Reading</option></select><button id="add-subject-btn" class="icon-btn" title="Add a subject" aria-label="Add a subject">＋</button></div>
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">CONFIGURATION</div>
+              <h3>Study Session</h3>
+            </div>
+            <span class="small-tag">SUBJECT</span>
+          </div>
+
+          <label for="subject-select" class="field-label">What are you studying?</label>
+          <div class="subject-row">
+            <div class="select-wrapper">
+              <select id="subject-select">
+                <option value="General">General</option>
+                <option value="Maths">Maths</option>
+                <option value="Science">Science</option>
+                <option value="Coding">Coding</option>
+                <option value="English">English</option>
+                <option value="Reading">Reading</option>
+              </select>
+            </div>
+            <button id="add-subject-btn" class="icon-btn" title="Add custom subject" aria-label="Add custom subject">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+
           <div class="divider"></div>
-          <div class="section-heading compact"><div><h3>Daily goal</h3></div><span class="muted">Target hours &amp; minutes</span></div>
+
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">TARGET</div>
+              <h3>Daily Goal</h3>
+            </div>
+            <span class="muted">Set hours &amp; minutes</span>
+          </div>
           <div class="goal-setting">
             <div class="time-field">
               <input id="goal-hours" type="number" min="0" max="23" value="4" aria-label="Goal hours">
@@ -51,17 +155,42 @@
               <input id="goal-mins" type="number" min="0" max="59" step="5" value="0" aria-label="Goal minutes">
               <span class="unit-label">min</span>
             </div>
-            <button id="save-goal-btn" class="btn btn-small">Save goal</button>
+            <button id="save-goal-btn" class="btn btn-small">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Save goal</span>
+            </button>
           </div>
-          <p class="hint">Tip: pause the timer when you take a break. Your records are saved on this laptop.</p>
+
+          <div class="tip-box">
+            <span class="tip-icon">✦</span>
+            <p class="hint">Pause the timer when taking a break. Your records are saved automatically on this device.</p>
+          </div>
         </article>
 
         <article class="card history-card">
-          <div class="section-heading"><div><div class="eyebrow">YOUR PROGRESS</div><h3>Recent sessions</h3></div><span id="session-count" class="count-pill">0 sessions</span></div>
-          <div id="history-list" class="history-list"><div class="empty-state"><span>◷</span><strong>Your first session starts here</strong><p>Complete a study session and it will show up here.</p></div></div>
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">YOUR PROGRESS</div>
+              <h3>Recent Sessions</h3>
+            </div>
+            <span id="session-count" class="count-pill">0 sessions</span>
+          </div>
+          <div id="history-list" class="history-list">
+            <div class="empty-state">
+              <div class="empty-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <strong>Your first session starts here</strong>
+              <p>Complete a study session and it will show up here.</p>
+            </div>
+          </div>
         </article>
       </section>
-      <footer><span>Made for focused days.</span><span>Stored locally on this device <span class="footer-dot">●</span></span></footer>
+
+      <footer class="app-footer">
+        <span>Made for focused deep work.</span>
+        <span class="footer-status"><span class="footer-dot">●</span> Stored locally on this device</span>
+      </footer>
     </main>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
