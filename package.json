@@ -19,7 +19,7 @@
   "build": {
     "appId": "com.coadcraft.studytracker",
     "productName": "Study Time Tracker",
-    "directories": { "output": "build-dist" },
+    "directories": { "output": "C:/Users/ashis/AppData/Local/Temp/study-tracker-dist" },
     "files": [
       "main.js",
       "preload.js",

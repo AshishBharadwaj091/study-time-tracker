@@ -6,7 +6,6 @@ let toastTimer = null;
 let activeView = 'dashboard';
 let selectedNoteId = null;
 let modalMode = null; // 'exam' | 'task'
-let editingItemId = null;
 
 const pad = (n) => String(n).padStart(2, '0');
 

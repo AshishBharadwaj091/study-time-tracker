@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, Notification } = (typeof electron === 'object' && electron !== null) ? electron : {};
+const { app, BrowserWindow, ipcMain } = (typeof electron === 'object' && electron !== null) ? electron : {};
 const path = require('path');
 const fs = require('fs');
 
