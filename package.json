@@ -9,7 +9,8 @@
     "start": "electron .",
     "dev": "electron .",
     "test": "node --test test/unit.test.js",
-    "dist": "electron-builder --win nsis"
+    "dist": "electron-builder --win nsis --config builder-config.json",
+    "dist:portable": "electron-builder --win portable --config builder-config.json"
   },
   "devDependencies": {
     "electron": "^35.0.0",
@@ -32,7 +33,7 @@
       "package.json"
     ],
     "win": {
-      "target": ["nsis"]
+      "target": ["nsis", "portable"]
     },
     "nsis": {
       "oneClick": false,
@@ -41,6 +42,10 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Study Time Tracker",
       "uninstallDisplayName": "Study Time Tracker"
+    },
+    "portable": {
+      "artifactName": "${productName} Portable ${version}.${ext}",
+      "requestExecutionLevel": "user"
     }
   }
 }

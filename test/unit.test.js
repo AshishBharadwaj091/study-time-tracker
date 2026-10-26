@@ -5,7 +5,7 @@
 const { test, describe } = require('node:test');
 const assert = require('node:assert/strict');
 const FocusEngine = require('../focus-engine.js');
-const { migrateData, defaultData } = require('../main.js');
+const { migrateData, defaultData, resolveDataDirectory } = require('../main.js');
 
 describe('1. Manual & Pomodoro Timer Timestamp Calculations', () => {
   test('currentElapsedManual correctly computes total seconds from base and live duration', () => {
@@ -333,3 +333,30 @@ describe('8. Data Schema Migration & Backward Compatibility', () => {
     assert.equal(fromGarbage.goalMinutes, 240);
   });
 });
+
+describe('9. Portable User Data Resolution & Safety', () => {
+  test('resolveDataDirectory safely returns default directory without crashing', () => {
+    const dir = resolveDataDirectory();
+    assert.ok(typeof dir === 'string' && dir.length > 0);
+  });
+
+  test('resolveDataDirectory respects PORTABLE_EXECUTABLE_DIR when portable-data directory exists', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const os = require('os');
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portable-test-'));
+    const portableDataDir = path.join(tempDir, 'portable-data');
+    fs.mkdirSync(portableDataDir);
+
+    const prevEnv = process.env.PORTABLE_EXECUTABLE_DIR;
+    process.env.PORTABLE_EXECUTABLE_DIR = tempDir;
+    try {
+      const resolved = resolveDataDirectory();
+      assert.equal(resolved, portableDataDir, 'Should resolve to portable-data folder');
+    } finally {
+      process.env.PORTABLE_EXECUTABLE_DIR = prevEnv;
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
+});
+

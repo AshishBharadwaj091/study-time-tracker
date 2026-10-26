@@ -6,8 +6,31 @@ const fs = require('fs');
 let mainWindow = null;
 let miniWindow = null;
 
-const dataPath = () => (app && app.getPath ? path.join(app.getPath('userData'), 'study-data.json') : path.join(__dirname, 'study-data.json'));
-const backupPath = () => (app && app.getPath ? path.join(app.getPath('userData'), 'study-data.backup.json') : path.join(__dirname, 'study-data.backup.json'));
+function resolveDataDirectory() {
+  // Support optional isolated portable storage if a 'portable-data' folder exists
+  // directly beside the portable executable (e.g. on a USB drive).
+  const exeDir = process.env.PORTABLE_EXECUTABLE_DIR || (process.platform === 'win32' && !process.defaultApp ? path.dirname(process.execPath) : null);
+  if (exeDir) {
+    const candidate = path.join(exeDir, 'portable-data');
+    if (fs.existsSync(candidate)) {
+      try {
+        fs.accessSync(candidate, fs.constants.W_OK);
+        return candidate;
+      } catch (err) {
+        console.warn('portable-data directory is not writable, falling back to userData:', err.message);
+      }
+    }
+  }
+
+  // Standard persistent userData (%APPDATA%\study-time-tracker on Windows)
+  if (app && app.getPath) {
+    return app.getPath('userData');
+  }
+  return __dirname;
+}
+
+const dataPath = () => path.join(resolveDataDirectory(), 'study-data.json');
+const backupPath = () => path.join(resolveDataDirectory(), 'study-data.backup.json');
 
 function defaultData() {
   return {
@@ -255,5 +278,5 @@ if (app && app.whenReady) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { defaultData, migrateData };
+  module.exports = { defaultData, migrateData, resolveDataDirectory };
 }

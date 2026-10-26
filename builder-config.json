@@ -17,7 +17,7 @@
     "package.json"
   ],
   "win": {
-    "target": ["nsis"]
+    "target": ["nsis", "portable"]
   },
   "nsis": {
     "oneClick": false,
@@ -26,5 +26,9 @@
     "createStartMenuShortcut": true,
     "shortcutName": "Study Time Tracker",
     "uninstallDisplayName": "Study Time Tracker"
+  },
+  "portable": {
+    "artifactName": "${productName} Portable ${version}.${ext}",
+    "requestExecutionLevel": "user"
   }
 }
