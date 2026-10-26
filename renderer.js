@@ -6,12 +6,12 @@ let toastTimer = null;
 const pad = (n) => String(n).padStart(2, '0');
 
 const SUBJECT_COLORS = {
-  general: '#818cf8',
-  maths: '#c084fc',
-  science: '#34d399',
-  coding: '#38bdf8',
-  english: '#fbbf24',
-  reading: '#f472b6'
+  general: '#f97316',
+  maths: '#fb923c',
+  science: '#10b981',
+  coding: '#f59e0b',
+  english: '#f43f5e',
+  reading: '#fbbf24'
 };
 
 function getSubjectColor(subject) {
@@ -95,16 +95,16 @@ function syncControls() {
   if ($('session-badge')) {
     if (running) {
       $('session-badge').textContent = 'RECORDING';
-      $('session-badge').style.color = 'var(--accent-green)';
-      $('session-badge').style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      $('session-badge').style.color = '#fb923c';
+      $('session-badge').style.borderColor = 'rgba(249, 115, 22, 0.45)';
     } else if (hasElapsed) {
       $('session-badge').textContent = 'PAUSED';
-      $('session-badge').style.color = 'var(--accent-amber)';
-      $('session-badge').style.borderColor = 'rgba(245, 158, 11, 0.4)';
+      $('session-badge').style.color = 'var(--accent-gold)';
+      $('session-badge').style.borderColor = 'rgba(245, 158, 11, 0.45)';
     } else {
       $('session-badge').textContent = 'FOCUS SESSION';
       $('session-badge').style.color = 'var(--primary-light)';
-      $('session-badge').style.borderColor = 'rgba(99, 102, 241, 0.3)';
+      $('session-badge').style.borderColor = 'rgba(249, 115, 22, 0.35)';
     }
   }
 

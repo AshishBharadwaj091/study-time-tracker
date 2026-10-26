@@ -23,7 +23,7 @@ function writeData(data) {
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1040, height: 780, minWidth: 780, minHeight: 640,
-    backgroundColor: '#0b1020',
+    backgroundColor: '#0c0906',
     title: 'Study Time Tracker',
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false }
   });
