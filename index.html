@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Time Tracker</title>
+  <title>Study Time Tracker — Personal Focus OS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
   <div class="ambient-glow ambient-3"></div>
 
   <div class="app-shell">
+    <!-- Topbar -->
     <header class="topbar">
       <div class="brand-group">
         <div class="brand-mark">
@@ -28,102 +29,234 @@
           <h1>Study Time Tracker</h1>
         </div>
       </div>
-      <div class="today-pill">
-        <span class="live-dot" id="live-dot"></span>
-        <span id="today-label">Today</span>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" aria-label="Main Navigation">
+        <button class="nav-tab active" data-view="dashboard" id="nav-btn-dashboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-tab" data-view="pomodoro" id="nav-btn-pomodoro">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 15 15"/></svg>
+          <span>Pomodoro</span>
+        </button>
+        <button class="nav-tab" data-view="analytics" id="nav-btn-analytics">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Analytics</span>
+        </button>
+        <button class="nav-tab" data-view="planner" id="nav-btn-planner">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Planner</span>
+        </button>
+        <button class="nav-tab" data-view="notes" id="nav-btn-notes">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>Notes</span>
+        </button>
+        <button class="nav-tab" data-view="achievements" id="nav-btn-achievements">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          <span>Streaks</span>
+        </button>
+        <button class="nav-tab" data-view="settings" id="nav-btn-settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <!-- Right Header Controls -->
+      <div class="topbar-right">
+        <button id="open-mini-timer-btn" class="mini-timer-toggle-btn" title="Open Floating Mini Timer" aria-label="Open Floating Mini Timer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="9" width="8" height="6" rx="1"/></svg>
+          <span>Mini Timer</span>
+        </button>
+        <div class="today-pill">
+          <span class="live-dot" id="live-dot"></span>
+          <span id="today-label">Today</span>
+        </div>
       </div>
     </header>
 
     <main>
-      <section class="hero card" id="hero-section">
-        <div class="hero-copy">
-          <div class="hero-status-row">
-            <span class="status-badge" id="session-badge">FOCUS SESSION</span>
-            <span class="subject-badge" id="active-subject-badge">General</span>
-          </div>
-          <div class="timer-display-wrapper">
-            <h2 id="timer-display" class="timer-display">00:00:00</h2>
-          </div>
-          <p id="timer-status">Ready when you are. Start a session to begin.</p>
-          <div class="timer-actions">
-            <button id="start-btn" class="btn btn-primary">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-              <span>Start studying</span>
-            </button>
-            <button id="pause-btn" class="btn btn-secondary" disabled>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
-              <span>Pause</span>
-            </button>
-            <button id="finish-btn" class="btn btn-quiet" disabled>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
-              <span>Finish</span>
-            </button>
-          </div>
-        </div>
-        <div class="focus-orb-container" aria-hidden="true">
-          <div class="focus-orb" id="focus-orb">
-            <div class="orb-pulse-layer layer-3"></div>
-            <div class="orb-pulse-layer layer-2"></div>
-            <div class="orb-pulse-layer layer-1"></div>
-            <div class="orb-inner">
-              <span class="orb-label">FOCUS</span>
-              <strong class="orb-icon">✦</strong>
-              <span class="orb-status" id="orb-status-text">IDLE</span>
+      <!-- ========================================== -->
+      <!-- VIEW 1: DASHBOARD (PRESERVED & ENHANCED)  -->
+      <!-- ========================================== -->
+      <div id="view-dashboard" class="app-view active">
+        <section class="hero card" id="hero-section">
+          <div class="hero-copy">
+            <div class="hero-status-row">
+              <span class="status-badge" id="session-badge">FOCUS SESSION</span>
+              <span class="subject-badge" id="active-subject-badge">General</span>
+            </div>
+            <div class="timer-display-wrapper">
+              <h2 id="timer-display" class="timer-display">00:00:00</h2>
+            </div>
+            <p id="timer-status">Ready when you are. Start a session to begin.</p>
+            <div class="timer-actions">
+              <button id="start-btn" class="btn btn-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                <span>Start studying</span>
+              </button>
+              <button id="pause-btn" class="btn btn-secondary" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+                <span>Pause</span>
+              </button>
+              <button id="finish-btn" class="btn btn-quiet" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                <span>Finish</span>
+              </button>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="grid stats-grid">
-        <article class="card stat-card">
-          <div class="stat-top">
-            <div class="stat-icon purple">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="focus-orb-container" aria-hidden="true">
+            <div class="focus-orb" id="focus-orb">
+              <div class="orb-pulse-layer layer-3"></div>
+              <div class="orb-pulse-layer layer-2"></div>
+              <div class="orb-pulse-layer layer-1"></div>
+              <div class="orb-inner">
+                <span class="orb-label">FOCUS</span>
+                <strong class="orb-icon">✦</strong>
+                <span class="orb-status" id="orb-status-text">IDLE</span>
+              </div>
             </div>
-            <span class="stat-label">STUDIED TODAY</span>
           </div>
-          <div id="today-total" class="stat-value">0h 00m</div>
-          <div class="stat-foot">Across all subjects</div>
-        </article>
+        </section>
 
-        <article class="card stat-card">
-          <div class="stat-top">
-            <div class="stat-icon blue">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <section class="grid stats-grid">
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon purple">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <span class="stat-label">STUDIED TODAY</span>
             </div>
-            <span class="stat-label">THIS WEEK</span>
-          </div>
-          <div id="week-total" class="stat-value">0h 00m</div>
-          <div class="stat-foot">Monday to today</div>
-        </article>
+            <div id="today-total" class="stat-value">0h 00m</div>
+            <div class="stat-foot">Across all subjects</div>
+          </article>
 
-        <article class="card stat-card">
-          <div class="stat-top">
-            <div class="stat-icon green">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon blue">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <span class="stat-label">THIS WEEK</span>
             </div>
-            <span class="stat-label">DAILY GOAL</span>
-          </div>
-          <div id="goal-total" class="stat-value">0%</div>
-          <div class="progress-track"><div id="goal-progress" class="progress-fill"></div></div>
-          <div id="goal-caption" class="stat-foot">0h 00m of 4h 00m goal</div>
-        </article>
-      </section>
+            <div id="week-total" class="stat-value">0h 00m</div>
+            <div class="stat-foot">Monday to today</div>
+          </article>
 
-      <section class="content-grid">
-        <article class="card subject-card">
-          <div class="section-heading">
-            <div>
-              <div class="eyebrow">CONFIGURATION</div>
-              <h3>Study Session</h3>
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon green">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <span class="stat-label">DAILY GOAL</span>
             </div>
-            <span class="small-tag">SUBJECT</span>
-          </div>
+            <div id="goal-total" class="stat-value">0%</div>
+            <div class="progress-track"><div id="goal-progress" class="progress-fill"></div></div>
+            <div id="goal-caption" class="stat-foot">0h 00m of 4h 00m goal</div>
+          </article>
+        </section>
 
-          <label for="subject-select" class="field-label">What are you studying?</label>
-          <div class="subject-row">
-            <div class="select-wrapper">
-              <select id="subject-select">
+        <section class="content-grid">
+          <article class="card subject-card">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">CONFIGURATION</div>
+                <h3>Study Session</h3>
+              </div>
+              <span class="small-tag">SUBJECT</span>
+            </div>
+
+            <label for="subject-select" class="field-label">What are you studying?</label>
+            <div class="subject-row">
+              <div class="select-wrapper">
+                <select id="subject-select">
+                  <option value="General">General</option>
+                  <option value="Maths">Maths</option>
+                  <option value="Science">Science</option>
+                  <option value="Coding">Coding</option>
+                  <option value="English">English</option>
+                  <option value="Reading">Reading</option>
+                </select>
+              </div>
+              <button id="add-subject-btn" class="icon-btn" title="Add custom subject" aria-label="Add custom subject">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-heading compact">
+              <div>
+                <div class="eyebrow">TARGET</div>
+                <h3>Daily Goal</h3>
+              </div>
+              <span class="muted">Set hours &amp; minutes</span>
+            </div>
+            <div class="goal-setting">
+              <div class="time-field">
+                <input id="goal-hours" type="number" min="0" max="23" value="4" aria-label="Goal hours">
+                <span class="unit-label">hr</span>
+              </div>
+              <div class="time-field">
+                <input id="goal-mins" type="number" min="0" max="59" step="5" value="0" aria-label="Goal minutes">
+                <span class="unit-label">min</span>
+              </div>
+              <button id="save-goal-btn" class="btn btn-small">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Save goal</span>
+              </button>
+            </div>
+
+            <div class="tip-box">
+              <span class="tip-icon">✦</span>
+              <p class="hint">Pause the timer when taking a break. Your records are saved automatically on this device.</p>
+            </div>
+          </article>
+
+          <article class="card history-card">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">YOUR PROGRESS</div>
+                <h3>Recent Sessions</h3>
+              </div>
+              <span id="session-count" class="count-pill">0 sessions</span>
+            </div>
+            <div id="history-list" class="history-list">
+              <div class="empty-state">
+                <div class="empty-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <strong>Your first session starts here</strong>
+                <p>Complete a study session and it will show up here.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: POMODORO FOCUS TIMER               -->
+      <!-- ========================================== -->
+      <div id="view-pomodoro" class="app-view">
+        <div class="pomodoro-layout">
+          <!-- Circular Timer Ring Card -->
+          <article class="card pomodoro-main-card">
+            <!-- Mode Switcher -->
+            <div class="pomo-mode-selector">
+              <button class="pomo-mode-btn active" data-mode="focus" id="pomo-mode-focus">
+                <span>Focus (25m)</span>
+              </button>
+              <button class="pomo-mode-btn" data-mode="shortBreak" id="pomo-mode-short">
+                <span>Short Break (5m)</span>
+              </button>
+              <button class="pomo-mode-btn" data-mode="longBreak" id="pomo-mode-long">
+                <span>Long Break (15m)</span>
+              </button>
+            </div>
+
+            <!-- Focus Subject Bar -->
+            <div class="pomo-subject-bar">
+              <span class="eyebrow">SUBJECT:</span>
+              <select id="pomo-subject-select" class="pomo-subject-dropdown">
                 <option value="General">General</option>
                 <option value="Maths">Maths</option>
                 <option value="Science">Science</option>
@@ -132,68 +265,498 @@
                 <option value="Reading">Reading</option>
               </select>
             </div>
-            <button id="add-subject-btn" class="icon-btn" title="Add custom subject" aria-label="Add custom subject">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-          </div>
 
-          <div class="divider"></div>
-
-          <div class="section-heading compact">
-            <div>
-              <div class="eyebrow">TARGET</div>
-              <h3>Daily Goal</h3>
+            <!-- Big Circular Countdown Ring -->
+            <div class="pomo-circle-wrap">
+              <svg class="pomo-svg" viewBox="0 0 280 280">
+                <circle class="pomo-track" cx="140" cy="140" r="120" />
+                <circle class="pomo-progress" id="pomo-progress-ring" cx="140" cy="140" r="120" />
+              </svg>
+              <div class="pomo-circle-content">
+                <span class="pomo-mode-tag" id="pomo-status-tag">FOCUS TIME</span>
+                <h2 class="pomo-clock" id="pomo-clock-display">25:00</h2>
+                <span class="pomo-session-count" id="pomo-cycle-text">Session 1 of 4</span>
+              </div>
             </div>
-            <span class="muted">Set hours &amp; minutes</span>
-          </div>
-          <div class="goal-setting">
-            <div class="time-field">
-              <input id="goal-hours" type="number" min="0" max="23" value="4" aria-label="Goal hours">
-              <span class="unit-label">hr</span>
-            </div>
-            <div class="time-field">
-              <input id="goal-mins" type="number" min="0" max="59" step="5" value="0" aria-label="Goal minutes">
-              <span class="unit-label">min</span>
-            </div>
-            <button id="save-goal-btn" class="btn btn-small">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Save goal</span>
-            </button>
-          </div>
 
-          <div class="tip-box">
-            <span class="tip-icon">✦</span>
-            <p class="hint">Pause the timer when taking a break. Your records are saved automatically on this device.</p>
-          </div>
-        </article>
+            <!-- Pomodoro Controls -->
+            <div class="pomo-controls">
+              <button id="pomo-start-btn" class="btn btn-primary btn-large">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                <span id="pomo-start-btn-text">Start Focus</span>
+              </button>
+              <button id="pomo-reset-btn" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                <span>Reset</span>
+              </button>
+              <button id="pomo-skip-btn" class="btn btn-quiet">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4v16l11-8zm11 0v16h2V4z"/></svg>
+                <span>Skip / Finish</span>
+              </button>
+            </div>
+          </article>
 
-        <article class="card history-card">
+          <!-- Pomodoro Stats & Presets Sidebar -->
+          <aside class="pomodoro-sidebar">
+            <article class="card pomo-side-card">
+              <div class="section-heading compact">
+                <div><div class="eyebrow">TODAY'S POMODOROS</div><h3>Cycle Progress</h3></div>
+                <span class="count-pill" id="pomo-total-completed">0 completed</span>
+              </div>
+              <div class="pomo-dots-row" id="pomo-dots-row">
+                <span class="pomo-dot active">1</span>
+                <span class="pomo-dot">2</span>
+                <span class="pomo-dot">3</span>
+                <span class="pomo-dot">4</span>
+              </div>
+              <p class="stat-foot" id="pomo-next-break-caption">4 focus sessions before a relaxing 15m long break.</p>
+            </article>
+
+            <article class="card pomo-side-card">
+              <div class="section-heading compact">
+                <div><div class="eyebrow">QUICK PRESETS</div><h3>Custom Durations</h3></div>
+              </div>
+              <div class="pomo-preset-chips">
+                <button class="preset-chip" data-min="15">15 min Sprint</button>
+                <button class="preset-chip active" data-min="25">25 min Standard</button>
+                <button class="preset-chip" data-min="45">45 min Deep</button>
+                <button class="preset-chip" data-min="60">60 min Power</button>
+              </div>
+            </article>
+
+            <article class="card pomo-side-card">
+              <div class="section-heading compact">
+                <div><div class="eyebrow">PREFERENCES</div><h3>Timer Audio &amp; Alert</h3></div>
+              </div>
+              <div class="toggle-row">
+                <span>Chime on completion</span>
+                <label class="switch"><input type="checkbox" id="pomo-sound-toggle" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-row">
+                <span>Desktop Notification</span>
+                <label class="switch"><input type="checkbox" id="pomo-notif-toggle" checked><span class="slider"></span></label>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 3: STUDY ANALYTICS & HEATMAP          -->
+      <!-- ========================================== -->
+      <div id="view-analytics" class="app-view">
+        <!-- Analytics Highlights Grid -->
+        <section class="grid analytics-stats-grid">
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon purple"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <span class="stat-label">THIS MONTH</span>
+            </div>
+            <div class="stat-value" id="analytics-month-total">0h 00m</div>
+            <div class="stat-foot" id="analytics-month-count">0 sessions recorded</div>
+          </article>
+
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon blue"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <span class="stat-label">DAILY AVERAGE</span>
+            </div>
+            <div class="stat-value" id="analytics-daily-avg">0h 00m</div>
+            <div class="stat-foot">On active study days</div>
+          </article>
+
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon green"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+              <span class="stat-label">MOST PRODUCTIVE</span>
+            </div>
+            <div class="stat-value" id="analytics-best-day">None</div>
+            <div class="stat-foot" id="analytics-best-day-detail">Based on your history</div>
+          </article>
+
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon purple"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <span class="stat-label">GOAL HIT RATE</span>
+            </div>
+            <div class="stat-value" id="analytics-goal-rate">0%</div>
+            <div class="stat-foot" id="analytics-goals-met-caption">0 days reached daily target</div>
+          </article>
+        </section>
+
+        <!-- 12-Week Activity Heatmap -->
+        <article class="card heatmap-card">
           <div class="section-heading">
             <div>
-              <div class="eyebrow">YOUR PROGRESS</div>
-              <h3>Recent Sessions</h3>
+              <div class="eyebrow">ACTIVITY MATRIX</div>
+              <h3>12-Week Study Heatmap</h3>
             </div>
-            <span id="session-count" class="count-pill">0 sessions</span>
+            <span class="muted" id="heatmap-total-label">0 hours studied in last 84 days</span>
           </div>
-          <div id="history-list" class="history-list">
-            <div class="empty-state">
-              <div class="empty-icon-wrap">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <strong>Your first session starts here</strong>
-              <p>Complete a study session and it will show up here.</p>
+
+          <!-- Heatmap Component -->
+          <div class="heatmap-container">
+            <div class="heatmap-grid" id="heatmap-grid">
+              <!-- Dynamically generated 12 weeks x 7 days -->
             </div>
+            <div class="heatmap-inspector" id="heatmap-inspector">
+              Hover over or click any square to see details
+            </div>
+          </div>
+
+          <!-- Heatmap Legend -->
+          <div class="heatmap-footer">
+            <span class="legend-text">Less</span>
+            <div class="legend-cell level-0" title="0 minutes"></div>
+            <div class="legend-cell level-1" title="1-30 minutes"></div>
+            <div class="legend-cell level-2" title="30-60 minutes"></div>
+            <div class="legend-cell level-3" title="1-2 hours"></div>
+            <div class="legend-cell level-4" title="2+ hours"></div>
+            <span class="legend-text">More</span>
           </div>
         </article>
-      </section>
 
+        <!-- Subject Breakdown & Last 14 Days Visualizer -->
+        <div class="content-grid">
+          <article class="card">
+            <div class="section-heading">
+              <div><div class="eyebrow">DISTRIBUTION</div><h3>Subject Breakdown</h3></div>
+              <span class="small-tag">ALL-TIME</span>
+            </div>
+            <div class="subject-bars-list" id="analytics-subject-bars">
+              <!-- Generated dynamically -->
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="section-heading">
+              <div><div class="eyebrow">TRENDS</div><h3>Last 14 Days Duration</h3></div>
+              <span class="small-tag">DAILY DURATION</span>
+            </div>
+            <div class="trend-bars-wrap" id="analytics-trend-chart">
+              <!-- 14 day bar visualization -->
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 4: EXAM & STUDY PLANNER               -->
+      <!-- ========================================== -->
+      <div id="view-planner" class="app-view">
+        <div class="planner-layout">
+          <!-- Left Column: Exams with Countdown -->
+          <div class="planner-column">
+            <article class="card">
+              <div class="section-heading">
+                <div>
+                  <div class="eyebrow">MILESTONES</div>
+                  <h3>Upcoming Exams</h3>
+                </div>
+                <button id="add-exam-btn" class="btn btn-small">＋ Add Exam</button>
+              </div>
+
+              <!-- Exam Filter Tabs -->
+              <div class="planner-tabs">
+                <button class="planner-tab active" data-exam-filter="upcoming" id="exam-tab-upcoming">Upcoming</button>
+                <button class="planner-tab" data-exam-filter="past" id="exam-tab-past">Past / Completed</button>
+              </div>
+
+              <div class="exam-list" id="exam-list">
+                <!-- Dynamically generated -->
+              </div>
+            </article>
+          </div>
+
+          <!-- Right Column: Study Tasks -->
+          <div class="planner-column">
+            <article class="card">
+              <div class="section-heading">
+                <div>
+                  <div class="eyebrow">EXECUTION</div>
+                  <h3>Study Tasks</h3>
+                </div>
+                <button id="add-task-btn" class="btn btn-small">＋ Add Task</button>
+              </div>
+
+              <!-- Task Filters & Search -->
+              <div class="task-filters-row">
+                <select id="task-filter-status" class="filter-select">
+                  <option value="all">All Tasks</option>
+                  <option value="active" selected>Active</option>
+                  <option value="completed">Completed</option>
+                </select>
+                <select id="task-filter-priority" class="filter-select">
+                  <option value="all">All Priorities</option>
+                  <option value="high">High Priority</option>
+                  <option value="medium">Medium Priority</option>
+                  <option value="low">Low Priority</option>
+                </select>
+              </div>
+
+              <div class="task-list" id="task-list">
+                <!-- Dynamically generated -->
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 5: STUDY NOTES (NOTEBOOK)             -->
+      <!-- ========================================== -->
+      <div id="view-notes" class="app-view">
+        <div class="notes-layout">
+          <!-- Notes List Sidebar -->
+          <aside class="card notes-sidebar">
+            <div class="section-heading compact">
+              <div><div class="eyebrow">NOTEBOOK</div><h3>Study Notes</h3></div>
+              <button id="new-note-btn" class="btn btn-small">＋ New</button>
+            </div>
+
+            <!-- Notes Search & Filter -->
+            <div class="notes-search-wrap">
+              <input type="text" id="notes-search-input" placeholder="Search title or content..." class="notes-search">
+            </div>
+
+            <div class="notes-list" id="notes-list">
+              <!-- Dynamically populated notes items -->
+            </div>
+          </aside>
+
+          <!-- Note Editor / Viewer -->
+          <article class="card notes-editor-card" id="notes-editor-pane">
+            <div class="empty-state" id="notes-empty-select">
+              <div class="empty-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+              <strong>Select or create a note</strong>
+              <p>Capture session thoughts, formula references, and exam revision summaries.</p>
+            </div>
+
+            <div class="note-editor-inner" id="note-editor-inner" style="display:none;">
+              <div class="note-editor-header">
+                <input type="text" id="note-title-input" class="note-title-field" placeholder="Note Title...">
+                <div class="note-actions">
+                  <span class="save-status-indicator" id="note-save-status">Saved</span>
+                  <button id="note-delete-btn" class="btn btn-quiet" title="Delete Note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Note Metadata Tag Row -->
+              <div class="note-meta-row">
+                <div class="meta-field">
+                  <span class="meta-label">Subject:</span>
+                  <select id="note-subject-select" class="meta-select">
+                    <option value="General">General</option>
+                    <option value="Maths">Maths</option>
+                    <option value="Science">Science</option>
+                    <option value="Coding">Coding</option>
+                    <option value="English">English</option>
+                    <option value="Reading">Reading</option>
+                  </select>
+                </div>
+                <div class="meta-field">
+                  <span class="meta-label">Exam Link:</span>
+                  <select id="note-exam-select" class="meta-select">
+                    <option value="">None</option>
+                  </select>
+                </div>
+                <span class="note-date-text" id="note-updated-date">Updated: Just now</span>
+              </div>
+
+              <!-- Note Body -->
+              <div class="note-editor-body">
+                <textarea id="note-content-input" class="note-textarea" placeholder="Write markdown notes here... Supports # Headers, **bold**, - bullet lists, `code`, and notes."></textarea>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 6: STREAKS & ACHIEVEMENTS             -->
+      <!-- ========================================== -->
+      <div id="view-achievements" class="app-view">
+        <!-- Streak Highlights -->
+        <section class="grid stats-grid">
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon purple">🔥</div>
+              <span class="stat-label">CURRENT STREAK</span>
+            </div>
+            <div class="stat-value" id="streak-current-count">0 Days</div>
+            <div class="stat-foot" id="streak-threshold-caption">Goal: At least 15m study per day</div>
+          </article>
+
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon blue">🏆</div>
+              <span class="stat-label">LONGEST STREAK</span>
+            </div>
+            <div class="stat-value" id="streak-longest-count">0 Days</div>
+            <div class="stat-foot">Personal best consistency</div>
+          </article>
+
+          <article class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon green">✦</div>
+              <span class="stat-label">TODAY'S STATUS</span>
+            </div>
+            <div class="stat-value" id="streak-today-status">Pending</div>
+            <div class="stat-foot" id="streak-today-caption">Study today to extend your streak</div>
+          </article>
+        </section>
+
+        <!-- Achievements Badges Grid -->
+        <article class="card achievements-card">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">MILESTONES</div>
+              <h3>Focus Achievements</h3>
+            </div>
+            <span class="count-pill" id="achievements-unlocked-count">0 / 8 Unlocked</span>
+          </div>
+
+          <div class="achievements-grid" id="achievements-grid">
+            <!-- Dynamically populated 8 badges -->
+          </div>
+        </article>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- VIEW 7: APPLICATION SETTINGS               -->
+      <!-- ========================================== -->
+      <div id="view-settings" class="app-view">
+        <div class="settings-grid">
+          <!-- Pomodoro Timing Configuration -->
+          <article class="card settings-card">
+            <div class="section-heading">
+              <div><div class="eyebrow">TIMER DURATION</div><h3>Pomodoro Settings</h3></div>
+            </div>
+            
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Focus Duration</strong>
+                <p>Length of active study intervals in minutes.</p>
+              </div>
+              <div class="time-field">
+                <input type="number" id="setting-focus-min" min="5" max="120" value="25">
+                <span class="unit-label">min</span>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Short Break Duration</strong>
+                <p>Quick breather between focus sessions.</p>
+              </div>
+              <div class="time-field">
+                <input type="number" id="setting-short-min" min="1" max="30" value="5">
+                <span class="unit-label">min</span>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Long Break Duration</strong>
+                <p>Extended recovery break after multiple cycles.</p>
+              </div>
+              <div class="time-field">
+                <input type="number" id="setting-long-min" min="5" max="60" value="15">
+                <span class="unit-label">min</span>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Long Break Interval</strong>
+                <p>Number of completed focus sessions before long break.</p>
+              </div>
+              <div class="time-field">
+                <input type="number" id="setting-long-interval" min="2" max="10" value="4">
+                <span class="unit-label">sessions</span>
+              </div>
+            </div>
+
+            <button id="save-pomo-settings-btn" class="btn btn-primary" style="margin-top: 14px;">Save Pomodoro Settings</button>
+          </article>
+
+          <!-- Streak & Notifications Configuration -->
+          <article class="card settings-card">
+            <div class="section-heading">
+              <div><div class="eyebrow">PREFERENCES</div><h3>Focus Preferences</h3></div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Daily Streak Threshold</strong>
+                <p>Minimum minutes studied in a day for streak to qualify.</p>
+              </div>
+              <div class="time-field">
+                <input type="number" id="setting-streak-min" min="1" max="180" value="15">
+                <span class="unit-label">min</span>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Completion Sound Chime</strong>
+                <p>Play audio synth tone when focus or break concludes.</p>
+              </div>
+              <label class="switch"><input type="checkbox" id="setting-sound-toggle" checked><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Desktop Notifications</strong>
+                <p>Show Windows notifications on session completion.</p>
+              </div>
+              <label class="switch"><input type="checkbox" id="setting-notif-toggle" checked><span class="slider"></span></label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <strong>Data Backup &amp; Storage</strong>
+                <p>Stored locally in AppData. Backup copy maintained automatically.</p>
+              </div>
+              <button id="export-data-btn" class="btn btn-secondary">Export JSON Backup</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- App Footer -->
       <footer class="app-footer">
-        <span>Made for focused deep work.</span>
-        <span class="footer-status"><span class="footer-dot">●</span> Stored locally on this device</span>
+        <span>Personal Focus OS • Study Time Tracker v1.0.0</span>
+        <span class="footer-status"><span class="footer-dot">●</span> Offline &amp; Stored locally on this device</span>
       </footer>
     </main>
   </div>
+
+  <!-- Toast Notification Container -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Modal Container for Adding Exams / Tasks -->
+  <div class="modal-overlay" id="planner-modal" style="display:none;">
+    <div class="modal-content card">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Exam</h3>
+        <button class="modal-close-btn" id="modal-close-btn">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Rendered dynamically for exam or task -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+        <button class="btn btn-primary" id="modal-confirm-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
   <script src="renderer.js"></script>
 </body>
 </html>
